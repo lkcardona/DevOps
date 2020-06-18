@@ -1,0 +1,25 @@
+FROM python:2.7-alpine
+#pulled in from image from Docker Hub
+
+RUN mkdir /app
+#made folder to run application source code
+
+WORKDIR  /app
+#set the working directory
+
+COPY requirements.txt requirements.txt
+#Copied requirements.txt file (second requirements is pathway, could have been /app/requirement.txt)
+
+RUN pip install -r requirement.txt
+#Ran the packet manager, for example Node.js has npm
+
+COPY . .
+#copied in the application source code
+
+LABEL maintainer="Laura Cardona <laura.k.cardona@gmail.com>" \
+#attaches arbitrary metadata, optional, creates a new layer
+    version="1.0"
+
+CMD flask run --host=0.0.0.0 --port=5000
+#defines the fault command that when run when this docker image gets started    
+
